@@ -1,0 +1,17 @@
+{% extends 'portal/base.html' %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+<section class="box small">
+    <h1>Регистрация</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <label class="label">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        {% endfor %}
+        <button type="submit" class="btn">Зарегистрироваться</button>
+    </form>
+    <p class="link-line">Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+</section>
+{% endblock %}
