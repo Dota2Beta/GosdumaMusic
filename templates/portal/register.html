@@ -1,0 +1,17 @@
+{% extends 'portal/base.html' %}
+{% block title %}Регистрация | GosdumaMusic{% endblock %}
+{% block content %}
+<section class="card auth-card">
+    <h1>Регистрация</h1>
+    <p class="muted">Заполните обязательные поля для создания аккаунта.</p>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <label class="field-label">{{ field.label }} {{ field }}</label>
+            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        {% endfor %}
+        <button type="submit" class="btn">Зарегистрироваться</button>
+    </form>
+    <p class="switch-link">Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+</section>
+{% endblock %}
