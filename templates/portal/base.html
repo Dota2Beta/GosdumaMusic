@@ -8,28 +8,28 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-<header class="site-header">
-    <a class="logo" href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">GosdumaMusic</a>
-    <nav class="menu">
-        {% if user.is_authenticated %}
-            <a href="{% url 'dashboard' %}">Личный кабинет</a>
-            <a href="{% url 'create_application' %}">Новая заявка</a>
-            {% if user.username == 'BraveGuap' %}<a href="{% url 'admin_panel' %}">Панель администратора</a>{% endif %}
-            <a href="{% url 'logout' %}">Выход</a>
-        {% else %}
-            <a href="{% url 'login' %}">Войти</a>
-            <a href="{% url 'register' %}">Регистрация</a>
-        {% endif %}
-    </nav>
+<header class="header">
+    <div class="header-inner">
+        <a class="logo" href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">GosdumaMusic</a>
+        <nav class="nav">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}">Кабинет</a>
+                <a href="{% url 'create_application' %}">Новая заявка</a>
+                {% if user.username == 'BraveGuap' %}<a href="{% url 'admin_panel' %}">Админ</a>{% endif %}
+                <a href="{% url 'logout' %}">Выход</a>
+            {% else %}
+                <a href="{% url 'login' %}">Вход</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </nav>
+    </div>
 </header>
 
-<main class="container">
+<main class="wrap">
     {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <div class="message {{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        </div>
+        {% for message in messages %}
+            <div class="msg {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
     {% endif %}
 
     {% block content %}{% endblock %}
